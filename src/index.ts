@@ -15,8 +15,28 @@ const _Observer = new Observer();
 const _Arbitrager = new Arbitrager();
 
 Db.connect().then(async () => {
-  const routes = await _Arbitrager.findRoutes();
+  const routes = await _Arbitrager.findTriplets();
 
-  let res = routes.map(item => item.map(ite => [ite.coin0.symbol, ite.coin1.symbol]));
-  console.log(res);
-});
+  console.log(routes.length);
+  const res = routes.map((route: any) => {
+    const enter = [route.enter.coin0.symbol, route.enter.coin1.symbol];
+    const first_stage = route.first_stage.map((item: any) => [item.coin0.symbol, item.coin1.symbol]);
+    const second_stage = route.second_stage.map((arra: any) => arra.map((item: any) => [item.coin0.symbol, item.coin1.symbol]));
+    return {enter, first_stage, second_stage};
+  });
+
+  const result = await routes.map((item: any) => {
+    const f = _Arbitrager.makeRoutes(item);
+    let obj = [];
+    for (let r of f) {
+      obj.push(
+        [`${r[0].coin0.symbol}/${r[0].coin1.symbol}`,
+        `${r[1].coin0.symbol}/${r[1].coin1.symbol}`,
+        `${r[2].coin0.symbol}/${r[2].coin1.symbol}`]
+      )
+    }
+    return obj;
+  });
+
+  console.log('result: ', result);
+  });

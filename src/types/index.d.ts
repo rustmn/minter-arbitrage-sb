@@ -24,8 +24,11 @@ export interface ICoin {
 }
 
 export interface IRoute {
-  swap_type: string
-  amount_in: string
-  amount_out: string
-  coins: ICoin[]
+  pools: IPool[]
+}
+
+export interface ITriplet {
+  enter: IPool
+  first_stage: IPool[]
+  second_stage: [IPool[]]
 }

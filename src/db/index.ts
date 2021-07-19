@@ -3,13 +3,14 @@ import config from '../config';
 import {
   Pair,
   Route,
-  Pool
+  Pool,
 } from './models';
 import {
   IPair,
   IRoute,
   IPool
 } from '../types';
+import Test from './models/test';
 
 class Db {
   async connect(): Promise<void> {
@@ -104,6 +105,17 @@ class Db {
     }
     catch(error) {
       console.error(error.message);
+      return false;
+    }
+    return created ? true : false;
+  }
+  async insertTest(test: any) {
+    let created;
+    try {
+      created = await Test.create(test);
+    }
+    catch(err) {
+      console.error(err.message);
       return false;
     }
     return created ? true : false;

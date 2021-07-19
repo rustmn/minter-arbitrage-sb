@@ -1,13 +1,11 @@
 import mongoose, { Schema, model } from 'mongoose';
-import { CoinSchema } from './coin';
+import { PoolSchema } from './pool';
 import { IRoute } from '../../types';
+
 const collection_name = 'routes';
 
 export const RouteSchema = new Schema<IRoute>({
-  swap_type: String,
-  amount_in: String,
-  amount_out: String,
-  coins: [CoinSchema]
+  pools: [PoolSchema]
 }, {
   collection: collection_name
 });
