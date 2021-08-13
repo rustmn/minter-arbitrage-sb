@@ -1,5 +1,7 @@
 import axios from 'axios';
 import config from './config';
+import Db from './db';
+import notifier from './notifier';
 
 interface findRouteConfig {
   [key: string]: string

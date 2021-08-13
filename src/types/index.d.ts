@@ -21,6 +21,7 @@ export interface IPool {
 export interface ICoin {
   id: number
   symbol: string
+  price?: number
 }
 
 export interface IRoute {

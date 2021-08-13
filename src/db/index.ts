@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
 import config from '../config';
 import {
-  Pair,
   Route,
+  Coin,
   Pool,
 } from './models';
 import {
-  IPair,
   IRoute,
-  IPool
+  IPool,
+  ICoin
 } from '../types';
 import Test from './models/test';
 
@@ -119,6 +119,16 @@ class Db {
       return false;
     }
     return created ? true : false;
+  }
+  async updateCoinPrice(coin: ICoin) {
+    let created;
+    try {
+      created = await Coin.replaceOne({ id: coin.id }, coin, { upsert: true });
+    }
+    catch(error) {
+      throw new Error(error.message);
+    }
+    return created.nModified ? true : false;
   }
 }
 

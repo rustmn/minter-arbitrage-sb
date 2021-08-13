@@ -108,7 +108,7 @@ export default class Observer {
     /**
      * Filter pools to contain only pools with liquidity > 1000$
      */
-    pools = pools.filter((pool) => parseFloat(pool.liquidity) > 1000);
+    pools = pools.filter((pool) => parseFloat(pool.liquidity_bip) > 300000);
 
     return pools;
   }

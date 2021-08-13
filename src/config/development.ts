@@ -8,5 +8,6 @@ export default {
     pass: process.env.DB_PASS_DEV as string,
     name: 'minter-arb-dev'
   },
-  chainId: 2
+  chainId: 2,
+  minter_bip_price_url: 'https://api.coingecko.com/api/v3/coins/bip'
 };
